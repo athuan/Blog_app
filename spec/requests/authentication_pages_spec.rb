@@ -86,6 +86,25 @@ describe "AuthenticationPages" do
           it "should render the desired protected page" do
             expect(page).to have_title('Edit user')
           end
+
+          # it "it don't appear profile and setting link" do
+          #   expect(page).not_to have_link('Profile', href: user_path(user))
+          # end
+          #it { should_not have_link('Profile', href: user_path(user))}
+
+          describe "when signing in again" do
+            before do
+              click_link "Sign out"
+              visit signin_path
+              fill_in "Email", with: user.email
+              fill_in "Password", with: user.password
+              click_button "Sign in"
+            end
+
+            it "should render the default (profile) page " do
+              expect(page).to have_title(user.name)
+            end
+          end
         end
       end
 
@@ -103,6 +122,17 @@ describe "AuthenticationPages" do
         describe "visiting the user index" do
           before { visit users_path }
           it { should have_title("Sign in") }
+        end
+      end
+
+      describe "in the Microposts controller" do
+        describe "submitting to the create action" do
+          before { post microposts_path }
+          specify { expect(response).to redirect_to(signin_path)}
+        end
+        describe "submitting to the destroy action" do
+          before { delete micropost_path(FactoryGirl.create(:micropost))}
+          specify { expect(response).to redirect_to(signin_path)}
         end
       end
     end
