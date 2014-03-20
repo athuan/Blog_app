@@ -8,8 +8,8 @@ namespace :db do
 end
 
 def make_users
-	admin = User.create!(name: "thuan",
-					email: "thuannm56@gmail.com",
+	admin = User.create!(name: "athuan",
+					email: "thuan56@gmail.com",
 					password: "foobar",
 					password_confirmation: "foobar",
 					admin: true )
