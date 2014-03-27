@@ -3,7 +3,13 @@
 	<span class="user">
 		<%= link_to feed_item.user.name, feed_item.user %>
 	</span>
+	<% if !feed_item.title.blank? %>
+		<span class="title">Title: <b><%= feed_item.title %></b></span>
+	<% else %>
+		<br><br />
+	<% end %>
 	<span class="content"><%= wrap(feed_item.content) %></span>
+	
 	<span class="timestamp">
 		Posted<%= time_ago_in_words(feed_item.created_at)%> ago.
 	</span>

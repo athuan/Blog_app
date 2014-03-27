@@ -11,16 +11,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140317173207) do
+ActiveRecord::Schema.define(version: 20140324084256) do
 
-  create_table "microposts", force: true do |t|
+  create_table "comments", force: true do |t|
+    t.string   "content"
+    t.integer  "entry_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "user_id"
+  end
+
+  add_index "comments", ["entry_id", "created_at"], name: "index_comments_on_entry_id_and_created_at"
+
+  create_table "entries", force: true do |t|
     t.string   "content"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "title"
   end
 
-  add_index "microposts", ["user_id", "created_at"], name: "index_microposts_on_user_id_and_created_at"
+  add_index "entries", ["user_id", "created_at"], name: "index_entries_on_user_id_and_created_at"
 
   create_table "relationships", force: true do |t|
     t.integer  "follower_id"

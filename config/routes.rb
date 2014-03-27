@@ -1,4 +1,4 @@
-SampleApp::Application.routes.draw do
+BlogApp::Application.routes.draw do
   #get "users/new"
   resources :users do
     member do
@@ -6,8 +6,9 @@ SampleApp::Application.routes.draw do
     end
   end
   resources :sessions, only: [:new, :create, :destroy]
-  resources :microposts, only: [:create, :destroy]
+  resources :entries
   resources :relationships, only: [:create, :destroy]
+  resources :comments
   #get "static_pages/..."
   #get "static_pages/home"
   #get "static_pages/help"
