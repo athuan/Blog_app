@@ -3,6 +3,7 @@ class EntriesController < ApplicationController
 	before_action :correct_user, only: :destroy
 
 	def index
+		@users = User.all
 	end
 
 	def show

@@ -6,9 +6,12 @@ class UsersController < ApplicationController
 
   def index
     @users = User.paginate(page: params[:page])
+    
+    @entries = Entry.paginate(page: params[:page])
   end
   
   def show
+    @users = User.all
   	@user = User.find(params[:id])
     @entries = @user.entries.paginate(page: params[:page])
   end
@@ -64,6 +67,8 @@ class UsersController < ApplicationController
     @users = @user.followers.paginate(page: params[:page])
     render 'show_follow'
   end
+
+  
 
   private
   	def user_params
